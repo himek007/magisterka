@@ -1,1 +1,2 @@
-web: gunicorn apppli:apppli
+web: gunicorn app:app
+web: gunicorn run:apppli
