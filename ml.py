@@ -21,11 +21,11 @@ from flask import Flask,request,jsonify
 import numpy as np
 import pickle
 model = pickle.load(open('model.pkl','rb'))
-app = Flask(__name__)
-@app.route('/')
+apppli = Flask(__name__)
+@apppli.route('/')
 def index():
     return "Hello world"
-@app.route('/predict',methods=['POST'])
+@apppli.route('/predict',methods=['POST'])
 def predict():
     plec = request.form.get('plec')
     wiek = request.form.get('wiek')
@@ -34,4 +34,4 @@ def predict():
     result = model.predict(input_query)[0]
     return jsonify({'outcome':str(result)})
 if __name__ == '__main__':
-    app.run(debug=True)
+    apppli.run(debug=True)
