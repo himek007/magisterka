@@ -1,1 +1,1 @@
-web: gunicorn ml:apppli
+web: gunicorn ml:app
