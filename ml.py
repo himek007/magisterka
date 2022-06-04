@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-df = pd.read_csv('c:/Users/Joachim/python/MagDane.csv')
+df = pd.read_csv('MagDane.csv')
 df.sample(5)
 X = df.drop(columns=['outcome'])
 y = df['outcome']
