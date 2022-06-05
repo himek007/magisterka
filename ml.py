@@ -39,6 +39,6 @@ def predict():
     input_query = np.array([[plec,wiek,tygodnie]])
     result = model.predict(input_query)[0]
     result2 = model2.predict(input_query)[0]
-    return jsonify({'outcome':str(result)}, {'outcome2':str(result2)})
+    return jsonify({'outcome':str(result), 'outcome2':str(result2)})
 if __name__ == '__main__':
     app.run(debug=True)
