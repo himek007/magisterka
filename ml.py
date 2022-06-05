@@ -13,13 +13,20 @@ rf = RandomForestClassifier()
 rf.fit(X_train.values ,y_train)
 y_pred = rf.predict(X_test.values)
 print(accuracy_score(y_test,y_pred))
+from sklearn.tree import DecisionTreeClassifier
+dt = DecisionTreeClassifier()
+dt.fit(X_train.values, y_train)
+y_pred2 = dt.predict(X_test.values)
+print(accuracy_score(y_test, y_pred2))
 #save the model in pickle format
 import pickle 
 pickle.dump(rf,open('model.pkl','wb'))
+pickle.dump(dt,open('model2.pkl','wb'))
 from flask import Flask,request,jsonify
 import numpy as np
 import pickle
 model = pickle.load(open('model.pkl','rb'))
+model2 =pickle.load(open('model2.pkl','rb'))
 app = Flask(__name__)
 @app.route('/')
 def index():
@@ -31,6 +38,7 @@ def predict():
     tygodnie = request.form.get('tygodnie')
     input_query = np.array([[plec,wiek,tygodnie]])
     result = model.predict(input_query)[0]
-    return jsonify({'outcome':str(result)})
+    result2 = model2.predict(input_query)[0]
+    return jsonify({'outcome':str(result)}, {'outcome2':str(result2)})
 if __name__ == '__main__':
     app.run(debug=True)
