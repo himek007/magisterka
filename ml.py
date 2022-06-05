@@ -25,9 +25,11 @@ print(f"Czas treningu drzewo decyzyjne: {stop - start}s")
 y_pred2 = dt.predict(X_test.values)
 print(accuracy_score(y_test, y_pred2))
 from sklearn.neural_network import MLPClassifier
-neu = MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(20,50), random_state=2)
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import StandardScaler
+neu = make_pipeline(StandardScaler(),  MLPClassifier(solver='lbfgs', alpha=1e-5, hidden_layer_sizes=(5,20), random_state=1)) 
 start = time.time()
-neu.fit(X_train.values, y_train)
+neu.fit(X_train.values, y_train.values)
 stop = time.time()
 print(f"Czas treningu sieci neuronowych: {stop - start}s")
 y_pred3 = neu.predict(X_test.values)
